@@ -8,17 +8,20 @@ function App() {
   const [to, setTo] = useState("pkr");
   const [convertedAmount, setConvertedAmount] = useState(0);
   const currencyLi = useCurrencyInfo(from);
+
   const swap = () => {
     setFrom(to);
     setTo(from);
     setAmount(convertedAmount);
     setConvertedAmount(amount);
   };
+
   const convertedResult = () => {
-    setConvertedAmount(amount * currencyLi[to]);
+    setConvertedAmount(amount * (currencyLi[to] || 0));
   };
 
   const options = Object.keys(currencyLi);
+
   return (
     <div
       className="w-full h-screen flex flex-wrap justify-center items-center bg-cover bg-no-repeat"
@@ -38,11 +41,11 @@ function App() {
               <InputBox
                 label="From"
                 currencyLi={currencyLi}
-                onCurrencyChange={(currency) => setAmount(amount)}
+                onCurrencyChange={(currency) => setFrom(currency)}
                 currancyOptions={options}
                 amount={amount}
                 selectCurrancy={from}
-                onAmountChange={(amount) => setAmount(amount)}
+                onAmountChange={(value) => setAmount(value)}
               />
             </div>
             <div className="relative w-full h-0.5">
@@ -51,7 +54,7 @@ function App() {
                 className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-white rounded-md bg-blue-600 text-white px-2 py-0.5"
                 onClick={swap}
               >
-                swap
+                Swap
               </button>
             </div>
             <div className="w-full mt-1 mb-4">
@@ -61,7 +64,7 @@ function App() {
                 onCurrencyChange={(currency) => setTo(currency)}
                 currancyOptions={options}
                 amount={convertedAmount}
-                selectCurrancy={from}
+                selectCurrancy={to}
                 amountDisable
               />
             </div>

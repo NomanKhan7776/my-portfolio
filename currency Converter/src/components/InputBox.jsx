@@ -14,7 +14,7 @@ function InputBox({
   const labelInputId = useId();
 
   return (
-    <div className={`bg-white p-3 rounded-lg text-sm flex `}>
+    <div className={`bg-white p-3 rounded-lg text-sm flex ${className}`}>
       <div className="w-1/2">
         <label
           htmlFor={labelInputId}
@@ -28,7 +28,7 @@ function InputBox({
           type="number"
           placeholder="Amount"
           disabled={amountDisable}
-          value={amount}
+          value={amount || ""}
           onChange={(e) =>
             onAmountChange && onAmountChange(Number(e.target.value))
           }
