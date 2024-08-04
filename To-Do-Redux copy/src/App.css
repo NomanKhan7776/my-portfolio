@@ -1,0 +1,43 @@
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.toggle-checkbox {
+  @apply hidden;
+}
+
+.toggle-checkbox:checked + .toggle-label {
+  @apply bg-blue-400;
+}
+
+.toggle-checkbox:checked + .toggle-label::before {
+  transform: translateX(100%);
+}
+
+.toggle-label {
+  @apply relative block w-12 h-6 rounded-full bg-gray-300 cursor-pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.toggle-label::before {
+  content: "";
+  @apply absolute top-0 left-0 w-6 h-6 rounded-full bg-white border-2 border-gray-300;
+  transition: transform 0.3s ease-in-out;
+}
+
+.toggle-checkbox:focus + .toggle-label {
+  @apply ring-2 ring-offset-2 ring-blue-400;
+}
+
+html.dark {
+ 
+  background-color: #1b1a1a !important;
+  color: #fff !important;
+}
+html.light {
+  
+  background-color: #fff !important;
+  color: #1b1a1a !important;
+}
